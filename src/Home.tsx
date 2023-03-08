@@ -8,12 +8,20 @@ function Home() {
     {
       title: 'Web dev top tips',
       body: 'lorem ipsum...',
-      author: 'luigi',
+      author: 'mario',
       id: 3,
     },
   ])
 
-  return <BlogList blogs={blogs} title='All blogs' />
+  return (
+    <div className='home'>
+      <BlogList blogs={blogs} title='All blogs' />
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === 'mario')}
+        title="Mario's blogs"
+      />
+    </div>
+  )
 }
 
 export default Home
