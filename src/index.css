@@ -33,6 +33,11 @@
   margin: 40px auto;
   padding: 20px;
 }
+.components {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
 
 /* blog previews / list */
 .blog-preview {
