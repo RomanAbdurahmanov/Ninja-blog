@@ -1,15 +1,11 @@
-import React from 'react'
-
-interface BlogType {
+export interface BlogType {
   title: string
   body: string
   author: string
   id: number
 }
 
-export interface BlogListType extends Array<BlogType> {}
-
-function BlogList({ blogs, title }: { blogs: BlogListType; title: string }) {
+function BlogList({ blogs, title }: { blogs: BlogType[]; title: string }) {
   return (
     <div className='blog-list'>
       <h2>{title}</h2>

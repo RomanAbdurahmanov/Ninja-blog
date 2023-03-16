@@ -1,4 +1,4 @@
-import BlogList, { BlogListType } from './BlogList'
+import BlogList, { BlogType } from './BlogList'
 import useFetch from './useFetch'
 
 function Home() {
@@ -6,7 +6,7 @@ function Home() {
     data: blogs,
     isLoading,
     error,
-  } = useFetch('http://localhost:8000/blogs')
+  } = useFetch<BlogType[]>('http://localhost:8000/blogs')
 
   return (
     <div className='home'>
