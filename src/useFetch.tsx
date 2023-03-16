@@ -5,9 +5,8 @@ function useFetch<T>(url: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  const abortCont = new AbortController()
-
   useEffect(() => {
+    const abortCont = new AbortController()
     setTimeout(() => {
       fetch(url, { signal: abortCont.signal })
         .then((res) => {
