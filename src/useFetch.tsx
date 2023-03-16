@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { BlogListType } from './BlogList'
-
-interface fetchedDataType extends BlogListType {}
 
 function useFetch(url: string) {
-  const [data, setData] = useState<fetchedDataType | null>(null)
+  const [data, setData] = useState<any | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
