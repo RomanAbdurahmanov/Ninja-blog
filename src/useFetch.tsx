@@ -22,11 +22,15 @@ function useFetch<T>(url: string) {
           setError(null)
         })
         .catch((err) => {
-          setIsLoading(false)
-          setError(err.message)
+          if (err.name === 'AbortError') {
+            console.log('fetch aborted')
+          } else {
+            setIsLoading(false)
+            setError(err.message)
+          }
         })
     }, 500)
-    return abortCont.abort()
+    return () => abortCont.abort()
   }, [url])
 
   return { data, isLoading, error }
