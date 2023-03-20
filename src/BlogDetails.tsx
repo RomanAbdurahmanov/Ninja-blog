@@ -1,10 +1,26 @@
 import { useParams } from 'react-router-dom'
+import { BlogType } from './BlogList'
+import useFetch from './useFetch'
 
 function BlogDetails() {
   const { id } = useParams()
+  const {
+    data: blog,
+    error,
+    isLoading,
+  } = useFetch<BlogType>('http://localhost:8000/blogs/' + id)
+
   return (
     <div className='blog-details'>
-      <h2>Blog Details - {id}</h2>
+      {isLoading && <div> Loading... </div>}
+      {error && <div> {error} </div>}
+      {blog && (
+        <article>
+          <h2>{blog.title}</h2>
+          <p>Written by {blog.author}</p>
+          <div>{blog.body}</div>
+        </article>
+      )}
     </div>
   )
 }
