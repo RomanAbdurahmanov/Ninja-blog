@@ -1,14 +1,31 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 function Create() {
   const [title, setTitile] = useState<string>('')
   const [body, setBody] = useState<string>('')
   const [author, setAuthor] = useState<string>('mario')
+  const [isPending, setIsPending] = useState(false)
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsPending(true)
+    const blog = { title, body, author }
+
+    setTimeout(() => {
+      fetch('http://localhost:8000/blogs/', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(blog),
+      }).then(() => {
+        setIsPending(false)
+      })
+    }, 500)
+  }
 
   return (
     <div className='create'>
       <h2>Create new blog</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Blog title:</label>
         <input
           type='text'
@@ -36,7 +53,8 @@ function Create() {
           <option value='mario'>mario</option>
           <option value='yoshi'>yoshi</option>
         </select>
-        <button>Submit</button>
+        {!isPending && <button>Submit</button>}
+        {isPending && <button disabled>Adding blog...</button>}
       </form>
     </div>
   )
