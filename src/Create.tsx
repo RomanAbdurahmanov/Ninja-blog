@@ -1,10 +1,12 @@
 import { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Create() {
   const [title, setTitile] = useState<string>('')
   const [body, setBody] = useState<string>('')
   const [author, setAuthor] = useState<string>('mario')
   const [isPending, setIsPending] = useState(false)
+  const naviagte = useNavigate()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -18,6 +20,7 @@ function Create() {
         body: JSON.stringify(blog),
       }).then(() => {
         setIsPending(false)
+        naviagte('/')
       })
     }, 500)
   }
